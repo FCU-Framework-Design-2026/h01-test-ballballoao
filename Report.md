@@ -15,15 +15,54 @@
  * 遊戲主體 (ChessGame 類別)：繼承 AbstractGame，實作暗棋的核心資料結構，包含一個 8 列 4 行的二維陣列 (Chess[][] board = new Chess) 作為棋盤，並使用變數記錄紅黑雙方的剩餘棋子數量（預設各 16 顆），以及判斷是否為遊戲的第一步 (firstFlip)。
 
 ## 程式、執行畫面及其說明
-迴圈的內容如下：
+以下為本專案的核心基礎架構程式碼：
 
 ```java
-for (int i = 1; i <= 5; i++) {
-    System.out.println("i = " + i);
+package org.example;
+import java.util.Scanner;
+
+// 玩家類別
+class Player { 
+    String name; 
+    int side = -1; // 0代表紅方, 1代表黑方, -1代表還沒決定
+}
+
+// 遊戲抽象類別，提供基礎框架
+abstract class AbstractGame { 
+    Player p1; 
+    Player p2; 
+    Player currentPlayer;
+}
+
+// 棋子類別
+class Chess { 
+    String name; 
+    int weight; // 大小階級 (例如：將帥為最高階)
+    int side;   // 0=紅, 1=黑 
+    String loc; // 位置 
+    boolean isFlipped; // 是否翻開
+}
+
+// 暗棋遊戲主類別，繼承 AbstractGame
+class ChessGame extends AbstractGame { 
+    Chess[][] board = new Chess; // 棋盤，8列(1~8) 4行(A~D) 
+    boolean firstFlip = true; // 紀錄是不是第一步 
+    int redCount = 16; // 紅方剩餘數量
+    int blackCount = 16; // 黑方剩餘數量
+}
+
+public class Main { 
+    public static void main(String[] args) { 
+        ChessGame game = new ChessGame(); 
+        Player p1 = new Player("玩家1"); 
+        Player p2 = new Player("玩家2");
+        
+        // 系統初始化與後續邏輯將在此執行
+    }
 }
 ```
 
-每一次，i 的值會變化。執行的畫面如下：
+執行畫面與說明
 
 ![](img/image.png)
 
